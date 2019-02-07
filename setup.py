@@ -8,6 +8,8 @@ try:
 except ImportError:
     have_cython = False
 
+    
+have_cython = True
 if have_cython:
     ext_modules = [Extension("cssdbpy.cssdbpy", ["cssdbpy/cssdbpy.pyx"]),
                    ]
