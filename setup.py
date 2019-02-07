@@ -1,23 +1,11 @@
 #!/usr/bin/env python
 from distutils.core import setup
 from distutils.extension import Extension
+from Cython.Distutils import build_ext
 
-try:
-    from Cython.Distutils import build_ext
-    have_cython = True
-except ImportError:
-    have_cython = False
+ext_modules = [Extension("cssdbpy.cssdbpy", ["cssdbpy/cssdbpy.pyx"]),]
+cmdclass = {'build_ext': build_ext}
 
-    
-have_cython = True
-if have_cython:
-    ext_modules = [Extension("cssdbpy.cssdbpy", ["cssdbpy/cssdbpy.pyx"]),
-                   ]
-    cmdclass = {'build_ext': build_ext}
-else:
-    cmdclass = {}
-    ext_modules = [Extension("cssdbpy.cssdbpy", ["cssdbpy/cssdbpy.c"]),
-                   ]
 setup(
     name='cssdbpy',
     version='0.2.1',
