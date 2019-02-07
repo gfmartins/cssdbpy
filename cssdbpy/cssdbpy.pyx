@@ -1,6 +1,6 @@
 import socket
 
-DEF SEND_TEMPLATE = b'{}\n{}\n'
+DEF SEND_TEMPLATE = b'%b\n%b\n'
 DEF END_SEND = b'\n'
 DEF READ_BUFFER = 1024*8
 DEF OK = b'ok'
@@ -33,7 +33,7 @@ cdef class Connection(object):
     def execute(self, *args):
         cdef list send_object = []
         for arg in args:
-            send_object.append(SEND_TEMPLATE.format(len(str(arg)), arg).encode())
+            send_object.append(SEND_TEMPLATE % (len(str(arg)), arg))
         send_object.append(END_SEND)
         self.sock.send(''.join(send_object))
         return self._read()
