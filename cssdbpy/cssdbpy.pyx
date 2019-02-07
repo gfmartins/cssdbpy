@@ -33,7 +33,7 @@ cdef class Connection(object):
     def execute(self, *args):
         cdef list send_object = []
         for arg in args:
-            send_object.append(SEND_TEMPLATE.format(len(str(arg)), arg))
+            send_object.append(SEND_TEMPLATE.format(len(str(arg)), arg).encode())
         send_object.append(END_SEND)
         self.sock.send(''.join(send_object))
         return self._read()
